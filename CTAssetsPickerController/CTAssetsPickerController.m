@@ -159,6 +159,9 @@ NSString * const CTAssetsPickerDidDeselectAssetNotification = @"CTAssetsPickerDi
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
     options.resizeMode = PHImageRequestOptionsResizeModeFast;
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    if ([[UIDevice currentDevice].model hasPrefix:@"iPad"] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad == false) {
+        options.deliveryMode = PHImageRequestOptionsDeliveryModeFastFormat;
+    }
  
     _thumbnailRequestOptions = options;
 }

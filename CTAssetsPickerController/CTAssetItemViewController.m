@@ -182,12 +182,11 @@
 {
     [self.scrollView setProgress:0];
     
-    CGSize targetSize = [self targetImageSize];
     PHImageRequestOptions *options = [self imageRequestOptions];
     
     self.imageRequestID =
     [self.imageManager ctassetsPickerRequestImageForAsset:self.asset
-                                 targetSize:targetSize
+                                 targetSize:PHImageManagerMaximumSize
                                 contentMode:PHImageContentModeAspectFit
                                     options:options
                               resultHandler:^(UIImage *image, NSDictionary *info) {
@@ -205,13 +204,6 @@
                                           [self.scrollView bind:self.asset image:image requestInfo:info];
                                   });
                               }];
-}
-
-- (CGSize)targetImageSize
-{
-    UIScreen *screen    = UIScreen.mainScreen;
-    CGFloat scale       = screen.scale;
-    return CGSizeMake(CGRectGetWidth(screen.bounds) * scale, CGRectGetHeight(screen.bounds) * scale);
 }
 
 - (PHImageRequestOptions *)imageRequestOptions
